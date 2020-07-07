@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--<Compile Include="Ini.fs" />-->
+    <!--<Compile Include="Icon.fs" />-->
+    <!--<Compile Include="Program.fs" />-->
+    <Compile Include="test.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="eto.forms" Version="2.5.2" />
+    <PackageReference Include="eto.platform.windows" Version="2.5.2" />
+    <PackageReference Include="system.drawing.common" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>
