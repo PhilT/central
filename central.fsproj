@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<Compile Include="Ini.fs" />-->
-    <!--<Compile Include="Icon.fs" />-->
-    <!--<Compile Include="Program.fs" />-->
-    <Compile Include="test.fs" />
+    <Compile Include="Ini.fs" />
+    <Compile Include="Icon.fs" />
+    <Compile Include="Form.fs" />
+    <Compile Include="Tray.fs" />
+    <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>

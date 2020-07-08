@@ -28,10 +28,8 @@ module Ini =
     |> Array.fold (fun (config, section) next ->
       match next with
       | Section newSection ->
-        printfn "New Section: %s" newSection
         Map.add newSection emptyIniMap config, newSection
       | KeyValue (key, value) ->
-        printfn "Key Value: [%s] = [%s]" key value
         Map.add section (Map.add key value config.[section]) config, section
       | _ -> config, section
     ) (Map.empty, "")
