@@ -50,7 +50,8 @@ let main _ =
     Ini.load "config.ini"
     |> Icon.loadAll
 
-  let createItem text image (exe: string) =
+
+  let createItem text image (exe: string) args =
     let row = new Forms.StackLayout(Orientation = Forms.Orientation.Horizontal, Padding = Padding(6), Width = 500, BackgroundColor = backgroundColor)
     let imgControl = new Forms.ImageView(Image = image, Width = 32, BackgroundColor = Color(A = 0.0f))
     let labelControl = new Forms.Label(Text = text, TextColor = color, Font = defaultFont, BackgroundColor = Color(A = 0.0f), Width = 400)
@@ -61,11 +62,11 @@ let main _ =
     row.Items.Add(Forms.StackLayoutItem(labelControl))
 
     let panel = new Forms.Panel(Content = row)
-    panel.MouseEnter.Add(fun _ -> printfn "Entered!")
-    panel.MouseLeave.Add(fun _ -> printfn "Left!")
     panel.MouseDown.Add(fun _ ->
-      Process.Start(exe) |> ignore
       form.Visible <- false
+
+      // AsyncInvoke ensures the process is started after this launcher is hidden
+      app.AsyncInvoke(fun _ -> Process.Start(exe, args) |> ignore)
     )
     Forms.StackLayoutItem(panel)
 
@@ -77,7 +78,7 @@ let main _ =
   layout.Items.Add(Forms.StackLayoutItem(border))
   items
   |> List.iter (fun ini ->
-    layout.Items.Add(createItem (" " + ini.title) ini.icon ini.exe)
+    layout.Items.Add(createItem (" " + ini.title) ini.icon ini.exe ini.args)
   )
   form.Content <- layout
 
