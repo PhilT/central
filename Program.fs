@@ -1,4 +1,5 @@
 open System
+open System.Reflection
 open Eto
 open Eto.Drawing
 open System.Diagnostics
@@ -16,8 +17,10 @@ let main _ =
   let backgroundColor = Color(0.2f, 0.2f, 0.2f)
   let highlighted = Color(0.15f, 0.15f, 0.15f)
 
-
-  let tray = new Forms.TrayIndicator(Image = new Bitmap("icon.png"))
+  let assembly = Assembly.GetExecutingAssembly()
+  let resource = assembly.GetManifestResourceStream("central.icon.ico")
+  let icon = new Icon(resource)
+  let tray = new Forms.TrayIndicator(Image = icon)
   tray.Show()
 
   let form =
@@ -25,7 +28,8 @@ let main _ =
       Title = "Central Launcher",
       Resizable = false,
       WindowStyle = Eto.Forms.WindowStyle.None,
-      MovableByWindowBackground = true
+      MovableByWindowBackground = true,
+      Icon = icon
     ))
 
 
